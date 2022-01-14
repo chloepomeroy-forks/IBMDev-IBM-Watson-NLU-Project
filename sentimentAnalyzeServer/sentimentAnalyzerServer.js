@@ -12,11 +12,11 @@ app.use(cors_app());
 /*Uncomment the following lines to loan the environment 
 variables that you set up in the .env file*/
 
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
-// const api_key = process.env.API_KEY;
-// const api_url = process.env.API_URL;
+const api_key = process.env.API_KEY;
+const api_url = process.env.API_URL;
 
 function getNLUInstance() {
     const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
@@ -67,8 +67,7 @@ app.get("/url/emotion", (req,res) => {
 //The endpoint for the webserver ending with /url/sentiment
 app.get("/url/sentiment", (req,res) => {
     let urlToAnalyze = req.query.url
-    const analyzeParams = 
-    {
+    const analyzeParams = {
         "url": urlToAnalyze,
         "features": {
             "keywords": {
@@ -118,8 +117,7 @@ app.get("/text/emotion", (req,res) => {
 
 app.get("/text/sentiment", (req,res) => {
     let textToAnalyze = req.query.text
-    const analyzeParams = 
-    {
+    const analyzeParams = {
         "text": textToAnalyze,
         "features": {
             "keywords": {
