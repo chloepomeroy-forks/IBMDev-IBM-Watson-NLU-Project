@@ -47,13 +47,8 @@ class App extends React.Component {
     let mode = this.state.mode
     url = url+"/" + mode + "/sentiment?"+ mode + "="+document.getElementById("textinput").value;
 
-    fetch(url, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        }, mode: 'cors', cache: 'default'
-      }).then((res) => res.json())
-        .then((data) => {
+    fetch(url).then((response)=>{
+        response.json().then((data)=>{
         this.setState({sentimentOutput:data.label});
         let output = data.label;
         let color = "white"
@@ -64,7 +59,8 @@ class App extends React.Component {
         }
         output = <div style={{color:color,fontSize:20}}>{output}</div>
         this.setState({sentimentOutput:output});
-      })};
+      })});
+  }
   
 
   sendForEmotionAnalysis = () => {
@@ -96,6 +92,7 @@ class App extends React.Component {
             {this.state.sentimentOutput}
       </div>
     );
-    };
+    }
 }
+
 export default App;
